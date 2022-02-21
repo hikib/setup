@@ -1,0 +1,21 @@
+---
+- name: My MO repos
+  hosts: localhost
+  connection: local
+  vars_files: vars.yml
+
+  tasks:
+  - name: Getting MO App Repo
+    # From private repo
+    shell: "gh repo clone hikmet-kibar/mo ~/repos/{{ my_repo }}/mo"
+
+  - name: Getting Mome Repo
+    # From private repo
+    shell: "gh repo clone hikmet-kibar/mome ~/repos/{{ my_repo }}/mome"
+
+  - name: Linking Files
+    ansible.builtin.file:
+      src: "~/repos/{{ my_repo }}/mome"
+      dest: ~/mome
+      state: link
+

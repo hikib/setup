@@ -1,0 +1,19 @@
+---
+- name: Local Scripts
+  hosts: localhost
+  connection: local
+  vars_files: vars.yml
+
+  tasks:
+  - name: Getting Scripts Repo
+    git:
+      repo: "https://{{ my_repo }}/scripts"
+      dest: "~/repos/{{ my_repo }}/scripts"
+      clone: yes
+      update: yes
+
+  - name: Linking To ~/.local/bin
+    file:
+      src: "~/repos/{{ my_repo }}/scripts/bin"
+      dest: ~/.local/bin
+      state: link

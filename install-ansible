@@ -1,0 +1,11 @@
+#! /bin/bash
+
+sudo apt-get update
+sudo apt install -y python3-pip ansible
+ansible --version
+
+ansible-galaxy collection install community.general
+pip3 install github3.py
+
+echo "Run 'ansible-playbook ./playbooks/<file>.yml' -i ./playbooks/hosts"
+
