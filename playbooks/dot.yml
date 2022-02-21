@@ -27,12 +27,20 @@
         dest: .bash_aliases
       - src: bash/dir_colors
         dest: .dir_colors
+      - src: tmux/tmux.conf
+        dest: .tmux.conf
       - src: vim/vimrc
         dest: .vimrc
       - src: vim/vim/mappings.vim
         dest: .vim/mappings.vim
       - src: vim/vim/functions.vim
         dest: .vim/functions.vim
-      - src: tmux/tmux.conf
-        dest: .tmux.conf
+      - src: vim/vim/ftdetect.vim
+        dest: .vim/ftdetect.vim
+      - src: vim/vim/spell
+        dest: .vim/spell
+      - src: vim/vim/after
+        dest: .vim/after
+      - src: vim/vim/ftplugin
+        dest: .vim/ftplugin
 
