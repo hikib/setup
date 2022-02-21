@@ -12,6 +12,11 @@
       clone: yes
       update: yes
 
+  - name: Creating .vim directory
+    ansible.builtin.file:
+      path: ~/vim/.vim
+      state: directory
+
   - name: Linking Dotfiles Files
     ansible.builtin.file:
       src: "~/repos/{{ my_repo }}/dot/{{ item.src }}"
