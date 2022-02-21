@@ -14,7 +14,7 @@
 
   - name: Creating .vim directory
     ansible.builtin.file:
-      path: ~/vim/.vim
+      path: ~/.vim
       state: directory
 
   - name: Linking Dotfiles Files
