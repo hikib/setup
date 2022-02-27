@@ -46,6 +46,8 @@
         dest: .vim/spell
       - src: vim/vim/after
         dest: .vim/after
+      - src: vim/vim/colors
+        dest: .vim/colors
       - src: vim/vim/ftplugin
         dest: .vim/ftplugin
 
