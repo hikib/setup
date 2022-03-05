@@ -32,6 +32,8 @@
         dest: .bash_aliases
       - src: bash/dir_colors
         dest: .dir_colors
+      - src: bash/inputrc
+        dest: .inputrc
       - src: tmux/tmux.conf
         dest: .tmux.conf
       - src: vim/vimrc
