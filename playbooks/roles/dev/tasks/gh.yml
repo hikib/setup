@@ -1,0 +1,12 @@
+---
+- name: Get Latest Release from GitHub
+  community.general.github_release:
+    user: cli
+    repo: cli
+    action: latest_release
+  register: release
+
+- name: Install Github CLI deb from github (Latest Version)
+  become: yes
+  ansible.builtin.apt:
+    deb: https://github.com/cli/cli/releases/download/{{ release.tag }}/gh_{{ release.tag | replace('v','') }}_linux_amd64.deb

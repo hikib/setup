@@ -1,0 +1,6 @@
+---
+- name: Install Go With Snap
+  become: yes
+  community.general.snap:
+    name: go
+    classic: yes

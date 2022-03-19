@@ -1,0 +1,9 @@
+---
+- hosts: local
+  become_ask_pass: yes
+  vars:
+    my_repo: github.com/hikmet-kibar
+  roles:
+    - system
+    - base
+    - dev

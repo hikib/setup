@@ -1,0 +1,12 @@
+---
+# For private repos that need access tokens
+- hosts: local
+  vars_prompt:
+    - name: gh_pat
+      prompt: Personal Access Token for GitHub
+      private: yes
+      unsafe: yes
+  vars:
+    my_repo: github.com/hikmet-kibar
+  roles:
+    - personal

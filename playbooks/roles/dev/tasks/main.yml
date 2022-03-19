@@ -1,0 +1,7 @@
+---
+- name: Installing Go
+  import_tasks: go.yml
+
+- name: Installing GitHub Cli
+  import_tasks: gh.yml
+
