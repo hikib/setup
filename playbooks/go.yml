@@ -1,0 +1,6 @@
+---
+- hosts: local
+  vars:
+    my_repo: github.com/hikmet-kibar
+  roles:
+    - dev
