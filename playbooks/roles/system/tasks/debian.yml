@@ -13,3 +13,4 @@
     - tmux
     - tree
     - fzf
+    - entr
