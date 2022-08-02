@@ -1,0 +1,11 @@
+---
+- hosts: local
+  # gather_facts: true
+  # vars:
+  #   my_repo: github.com/hikmet-kibar
+  # become: true
+  tasks:
+    - name: Getting RustYML
+      ansible.builtin.include_role:
+        name: dev
+        tasks_from: rust.yml
