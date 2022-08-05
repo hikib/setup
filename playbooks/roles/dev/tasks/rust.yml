@@ -1,5 +1,5 @@
 ---
-- name: check if cargo is installed
+- name: Check If Cargo Is Installed
   shell: command -v cargo
   register: cargo_exists
   ignore_errors: yes
