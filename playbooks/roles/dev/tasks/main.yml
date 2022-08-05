@@ -8,3 +8,5 @@
 - name: Installing GitHub Cli
   import_tasks: gh.yml
 
+- name: Installing Docker
+  import_tasks: docker.yml

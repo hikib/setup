@@ -8,4 +8,3 @@ ansible-galaxy collection install community.general
 pip3 install github3.py
 
 echo "Run 'ansible-playbook ./playbooks/<file>.yml' -i ./playbooks/hosts --ask-become-pass"
-

@@ -1,10 +1,12 @@
 ---
 - hosts: localhost
   gather_facts: true
-  become_ask_pass: yes
   vars:
     my_repo: github.com/hikmet-kibar
   roles:
-    - system
-    - base
-    - dev
+    - role: system
+      tags: system_tag
+    - role: base
+      tags: base_tag
+    - role: dev
+      tags: dev_tag
