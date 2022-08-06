@@ -12,5 +12,5 @@
     - vim
     - tmux
     - tree
-    - fzf
+    - curl
     - entr

@@ -6,7 +6,7 @@
 
 - name: Get Latest Release from GitHub
   when: gh_exists is failed
-  community.general.github_release:
+  github_release:
     user: cli
     repo: cli
     action: latest_release

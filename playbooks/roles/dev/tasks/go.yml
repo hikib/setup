@@ -6,7 +6,7 @@
 
 - name: Install Go With Snap
   when: go_exists is failed
-  become: true
-  community.general.snap:
+  become: yes
+  snap:
     name: go
     classic: yes
