@@ -10,3 +10,5 @@
       tags: base_tag
     - role: dev
       tags: dev_tag
+    - role: aec
+      tags: aec_tag
