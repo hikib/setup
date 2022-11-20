@@ -1,0 +1,12 @@
+---
+- name: Check If Go Exists
+  shell: command -v go
+  register: go_exists
+  ignore_errors: yes
+
+- name: Install Go With Snap
+  when: go_exists is failed
+  become: true
+  community.general.snap:
+    name: go
+    classic: yes

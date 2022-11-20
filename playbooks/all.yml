@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  gather_facts: true
+  collections:
+    - community.general.snap
+  vars:
+    my_repo: github.com/hikmet-kibar
+  roles:
+    - role: system
+      tags: system_tag
+    - role: base
+      tags: base_tag
+    - role: dev
+      tags: dev_tag
+    - role: aec
+      tags: aec_tag

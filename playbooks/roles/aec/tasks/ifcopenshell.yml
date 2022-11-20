@@ -1,0 +1,113 @@
+---
+- name: Check If IfcOpenShell Is Installed
+  shell: command -v ifcopenshell
+  register: ifc_exists
+  ignore_errors: yes
+
+# v0.7.0a4
+
+- name: Get Releases
+  uri:
+    url: "https://api.github.com/repos/IfcOpenShell/IfcOpenShell/releases/v0.7.0a4"
+    return_content: true
+  register: ifc_asset
+
+- name: Get GitHub asset
+  unarchive:
+    remote_src: yes
+    src: "{{ ifc_asset.json.tarball }}"
+    dest: "./ifc.tar.gz"
+
+# - name: Get IfcOpenShell Release
+#   loop: "{{ all_releases.json }}"
+#   when: "{{ 'v0.7.0a4' in item.tag_name }}"
+#   unarchive:
+#     remote_src: yes
+#     src: "{{ item.browser_download_url }}"
+#     dest: "./ifc.tar.gz"
+#     keep_newer: yes
+#     extra_opts:
+#     - --strip=1
+#     - --no-anchored
+#     # - ifc
+#   # register: ifc_tagged
+#   # debug: msg="{{ item.tag_name }}"
+
+# - name: getting url
+#   get_url:
+#     url: "{{ ifc_tagged.tarball_url }}"
+#     dest: "./ifc.tar.gz"
+
+# - name: Get IfcOpenShell Release
+#   when: "{{ 'v0' in item.tag_name }}"
+#   register: ifc_tagged
+#   debug: msg="{{ item.tag_name }}"
+#   loop: "{{ all_releases.json }}"
+
+
+# - name: GET match
+#   when: "item|int == 0"
+#   register: matched_ifc
+#   debug: msg="{{ item.tag_name }}"
+#   loop: "{{ ifc_tagged }}"
+
+
+- debug:
+    msg="{{ ifc_tagged }}"
+
+
+# - name: Install Dependencies
+#   when: ifcopenshell is failed
+#   apt:
+#     name: "{{item}}"
+#     state: presen
+#     update_cache: yes
+#   loop:
+#     -git
+#     -cmake
+#     -gcc
+#     -g++
+#     -libboost-all-dev
+#     -libcgal-dev
+
+# - name: Install OCCT Packages
+#   when: ifcopenshell is failed
+#   apt:
+#     name: "{{item}}"
+#     state: presen
+#     update_cache: yes
+#   loop:
+#     -libocct-data-exchange-dev
+#     -libocct-draw-dev
+#     -libocct-foundation-dev
+#     -libocct-modeling-algorithms-dev
+#     -libocct-modeling-data-dev
+#     -libocct-ocaf-dev
+#     -libocct-visualization-dev
+
+# - name: Building IfcConvert
+#   $ sudo apt-get install libpcre3-dev libxml2-dev
+#   $ git clone https://github.com/KhronosGroup/OpenCOLLADA.git
+#   $ cd OpenCOLLADA
+#   Using a known good revision, but HEAD should work too:
+#   $ git checkout 064a60b65c2c31b94f013820856bc84fb1937cc6
+#   $ mkdir build && cd build
+#   $ cmake ..
+#   $ make -j
+#   $ sudo make install
+
+# - name: Download Installer
+#   when: cargo_exists is failed
+#   get_url:
+#     url: https://sh.rustup.rs
+#     dest: /tmp/sh.rustup.rs
+#     mode: '0755'
+#     force: 'yes'
+#   tags:
+#     - rust
+
+# - name: Install Rust/Cargo
+#   when: cargo_exists is failed
+#   shell: /tmp/sh.rustup.rs -y
+#   tags:
+#     - rust

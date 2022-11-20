@@ -1,7 +1,0 @@
----
-- import_playbook: system.yml
-- import_playbook: dot.yml
-- import_playbook: scripts.yml
-- import_playbook: gh.yml
-- import_playbook: mo.yml
-- import_playbook: go.yml

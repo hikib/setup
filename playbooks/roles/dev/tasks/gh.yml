@@ -1,0 +1,19 @@
+---
+- name: Check If GitHub CLI Exists
+  shell: command -v gh
+  register: gh_exists
+  ignore_errors: yes
+
+- name: Get Latest Release from GitHub
+  when: gh_exists is failed
+  github_release:
+    user: cli
+    repo: cli
+    action: latest_release
+  register: release
+
+- name: Install Github CLI deb from github (Latest Version)
+  when: gh_exists is failed
+  become: yes
+  ansible.builtin.apt:
+    deb: https://github.com/cli/cli/releases/download/{{ release.tag }}/gh_{{ release.tag | replace('v','') }}_linux_amd64.deb

@@ -1,0 +1,23 @@
+---
+- name: Getting MO App Repo
+  # shell: "gh repo clone hikmet-kibar/mo ~/repos/{{ my_repo }}/mo"
+  git:
+    repo: "https://hikmet-kibar:{{ gh_pat }}@{{ my_repo }}/mo.git"
+    dest: "~/repos/{{ my_repo }}/mo"
+    clone: yes
+    update: yes
+
+- name: Getting Mome Repo
+  # shell: "gh repo clone hikmet-kibar/mome ~/repos/{{ my_repo }}/mome"
+  git:
+    repo: "https://hikmet-kibar:{{ gh_pat }}@{{ my_repo }}/mome.git"
+    dest: "~/repos/{{ my_repo }}/mome"
+    clone: yes
+    update: yes
+
+- name: Linking Files
+  ansible.builtin.file:
+    src: "~/repos/{{ my_repo }}/mome"
+    dest: ~/mome
+    state: link
+

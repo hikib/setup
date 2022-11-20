@@ -1,0 +1,6 @@
+---
+- name: Local Scripts
+  import_tasks: scripts.yml
+
+- name: Dotfiles and Scripts
+  import_tasks: dot.yml

@@ -1,0 +1,17 @@
+---
+- name: Updating System
+  become: yes
+  ansible.builtin.apt:
+    upgrade: dist
+    update_cache: yes
+
+- name: Installing Packages
+  become: yes
+  ansible.builtin.apt:
+    package:
+    - vim
+    - tmux
+    - tree
+    - curl
+    - entr
+    - w3m
