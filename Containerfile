@@ -3,36 +3,40 @@ MAINTAINER "hikib <hikib@proton.me>
 
 # --- NEED
 RUN apk add --no-cache \
+    bash-completion \
+    curl \
     git \
+    github-cli \
+    less \
+    man-db \
+    shellcheck \
+    tmux \
+    tree \
+    tzdata \
     vim \
     w3m \
-    curl \
-    tmux \
-    bash-completion \
-    tree \
-    github-cli \
-    wget \
-    less \
-    man-db
+    wget
 
 WORKDIR /home/repos/github.com/hikmet-kibar
 ENV HOME /home
 
 RUN git clone https://github.com/hikmet-kibar/dot && \
     git clone https://github.com/hikmet-kibar/scripts && \
-    chmod 0755 ./dot/bash/setup \
-    ./dot/vim/setup \
-    ./dot/tmux/setup \
-    ./scripts/setup
+    chmod 0756 ./dot/uni/bash/setup \
+    ./dot/uni/tmux/setup \
+    ./dot/uni/vim/setup \
+    ./dot/uni/w3m/setup \
+    ./scripts/uni/setup
 
 # --- SETUP
 # TODO: add a single, minimal setup file
-RUN ./dot/bash/setup && \
-    ./dot/vim/setup && \
-    ./dot/tmux/setup && \
-    ./scripts/setup
+RUN ./dot/uni/bash/setup && \
+    ./dot/uni/vim/setup && \
+    ./dot/uni/tmux/setup && \
+    ./dot/uni/w3m/setup && \
+    ./scripts/uni/setup
 
-# TODO install vim plugins
+ENV TZ=Europe/Copenhagen
 
 WORKDIR /home
 CMD ["/bin/bash"]
