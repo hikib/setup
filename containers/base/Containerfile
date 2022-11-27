@@ -2,11 +2,10 @@ FROM alpine:latest
 MAINTAINER "hikib <hikib@proton.me>
 
 # --- NEED
-RUN apk add --no-cache \
+RUN apk update && apk add --no-cache \
     bash-completion \
     curl \
     git \
-    github-cli \
     less \
     man-db \
     shellcheck \
@@ -14,7 +13,6 @@ RUN apk add --no-cache \
     tree \
     tzdata \
     vim \
-    w3m \
     wget
 
 WORKDIR /home/repos/github.com/hikmet-kibar
@@ -26,7 +24,6 @@ RUN git clone https://github.com/hikmet-kibar/dot && \
     chmod 0756 ./dot/uni/bash/setup \
     ./dot/uni/tmux/setup \
     ./dot/uni/vim/setup \
-    ./dot/uni/w3m/setup \
     ./scripts/uni/setup
 
 # TODO:
@@ -36,7 +33,6 @@ RUN git clone https://github.com/hikmet-kibar/dot && \
 RUN ./dot/uni/bash/setup && \
     ./dot/uni/vim/setup && \
     ./dot/uni/tmux/setup && \
-    ./dot/uni/w3m/setup && \
     ./scripts/uni/setup
 
 ENV TZ=Europe/Copenhagen

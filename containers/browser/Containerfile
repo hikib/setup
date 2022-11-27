@@ -1,0 +1,17 @@
+FROM alpine:latest
+MAINTAINER "hikib <hikib@proton.me>
+
+# --- NEED
+RUN apk update && apk add --no-cache w3m git curl
+WORKDIR /home/repos/github.com/hikmet-kibar
+ENV HOME /home
+
+# --- SETUP
+RUN git clone https://github.com/hikmet-kibar/dot && \
+    chmod 0756 ./dot/uni/w3m/setup
+RUN ./dot/uni/w3m/setup
+ENV TZ=Europe/Copenhagen
+
+WORKDIR /home
+ENTRYPOINT ["w3m"]
+CMD ["https://lite.duckduckgo.com/"]
