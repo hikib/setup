@@ -1,4 +1,14 @@
-# Setup For New Machines
+# Setup
+
+## Containers
+Using podman to run separate containers on Windows machine.
+See my [.ps1 scripts](https://github.com/hikmet-kibar/scripts) as
+reference for how to run the containers.
+
+## Ansible
+
+_WILL BE REMOVED_ because I switched to a container setup (see
+[containers](containers)
 
 Ansible to set up working environments
 
