@@ -20,6 +20,7 @@ RUN apk add --no-cache \
 WORKDIR /home/repos/github.com/hikmet-kibar
 ENV HOME /home
 
+# --- SETUP
 RUN git clone https://github.com/hikmet-kibar/dot && \
     git clone https://github.com/hikmet-kibar/scripts && \
     chmod 0756 ./dot/uni/bash/setup \
@@ -28,8 +29,10 @@ RUN git clone https://github.com/hikmet-kibar/dot && \
     ./dot/uni/w3m/setup \
     ./scripts/uni/setup
 
-# --- SETUP
-# TODO: add a single, minimal setup file
+# TODO:
+# * All scripts in ~/.local/bin need chmod?
+#   Different solution?
+# * Add a single, minimal setup file?
 RUN ./dot/uni/bash/setup && \
     ./dot/uni/vim/setup && \
     ./dot/uni/tmux/setup && \
