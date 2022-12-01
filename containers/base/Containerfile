@@ -1,6 +1,16 @@
 FROM alpine:latest
 MAINTAINER "hikib <hikib@proton.me>
 
+# TODO:
+#   - start in tmux
+#   - manuals missing?
+#   - git necessary?
+#     using git on powershell anyway.
+#     wget dot files instead?
+#   - all scripts in ~/.local/bin need chmod?
+#     different solution?
+#   - add a single, minimal setup file instead of each dot
+
 # --- NEED
 RUN apk update && apk add --no-cache \
     bash-completion \
@@ -12,8 +22,7 @@ RUN apk update && apk add --no-cache \
     tmux \
     tree \
     tzdata \
-    vim \
-    wget
+    vim
 
 WORKDIR /home/repos/github.com/hikmet-kibar
 ENV HOME /home
@@ -27,9 +36,6 @@ RUN git clone https://github.com/hikmet-kibar/dot && \
     ./scripts/uni/setup
 
 # TODO:
-# * All scripts in ~/.local/bin need chmod?
-#   Different solution?
-# * Add a single, minimal setup file?
 RUN ./dot/uni/bash/setup && \
     ./dot/uni/vim/setup && \
     ./dot/uni/tmux/setup && \
