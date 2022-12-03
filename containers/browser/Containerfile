@@ -3,7 +3,7 @@ MAINTAINER "hikib <hikib@proton.me>
 
 # TODO: start in tmux to copy/paste
 # --- NEED
-RUN apk add --no-cache w3m
+RUN apk update && apk add --no-cache w3m
 WORKDIR /web
 # --- CONFIG
 RUN wget https://raw.githubusercontent.com/hikmet-kibar/dot/master/uni/w3m/bookmark.html
