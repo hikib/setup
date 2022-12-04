@@ -1,48 +1,33 @@
 FROM alpine:latest
 MAINTAINER "hikib <hikib@proton.me>
 
-# TODO:
-#   - start in tmux
-#   - manuals missing?
-#   - git necessary?
-#     using git on powershell anyway.
-#     wget dot files instead?
-#   - all scripts in ~/.local/bin need chmod?
-#     different solution?
-#   - add a single, minimal setup file instead of each dot
-
 # --- NEED
 RUN apk update && apk add --no-cache \
+    bash \
     bash-completion \
     curl \
     git \
-    less \
-    man-db \
     shellcheck \
     tmux \
     tree \
     tzdata \
     vim
 
-WORKDIR /home/repos/github.com/hikmet-kibar
-ENV HOME /home
-
 # --- SETUP
-RUN git clone https://github.com/hikmet-kibar/dot && \
-    git clone https://github.com/hikmet-kibar/scripts && \
-    chmod 0756 ./dot/uni/bash/setup \
-    ./dot/uni/tmux/setup \
-    ./dot/uni/vim/setup \
-    ./scripts/uni/setup
+ENV HOME /home
+ENV TZ=Europe/Copenhagen
 
-# TODO:
+WORKDIR /dotfiles
+RUN git clone https://github.com/hikmet-kibar/dot && \
+    git clone https://github.com/hikmet-kibar/scripts
 RUN ./dot/uni/bash/setup && \
     ./dot/uni/vim/setup && \
     ./dot/uni/tmux/setup && \
     ./scripts/uni/setup
 
-ENV TZ=Europe/Copenhagen
-
 WORKDIR /home
-CMD ["/bin/bash"]
+
+# --- START IN TMUX
+ENTRYPOINT ["/bin/bash", "-l", "-c"]
+CMD ["tmux", "new", "-s", "dev"]
 
