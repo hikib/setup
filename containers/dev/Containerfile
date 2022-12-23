@@ -25,9 +25,11 @@ RUN apk update && apk add --no-cache \
 
 WORKDIR /dotfiles
 RUN git clone https://github.com/hikmet-kibar/dot && \
-    ./dot/uni/bash/setup && \
+    ./dot/uni/tmux/setup && \
+    ./dot/uni/bash/setup
 
-COPY ./v .
+COPY ./v ./v
+RUN chmod +x ./v/setup
 RUN ./v/setup
 
 # RUN git clone https://github.com/hikmet-kibar/scripts && \
