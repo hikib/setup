@@ -1,0 +1,37 @@
+FROM alpine:latest
+MAINTAINER "hikib <hikib@proton.me>
+
+# ---- SETUP
+ENV HOME /home
+ENV TZ=Europe/Copenhagen
+
+# ---- APPS
+WORKDIR /dotfiles
+RUN apk update && apk add --no-cache \
+    bash \
+    bash-completion \
+    curl \
+    git \
+    go \
+    py3-pip \
+    python3 \
+    shellcheck \
+    tmux \
+    tree \
+    tzdata \
+    vim \
+    w3m
+
+# ---- CONFIG
+RUN git clone https://github.com/hikmet-kibar/scripts && \
+    git clone https://github.com/hikmet-kibar/dot && \
+    ./scripts/uni/setup && \
+    ./dot/uni/bash/setup && \
+    ./dot/uni/tmux/setup && \
+    ./dot/uni/vim/setup && \
+    ./dot/uni/w3m/setup
+
+# ---- START IN TMUX
+WORKDIR /home
+ENTRYPOINT ["/bin/bash", "-l", "-c"]
+CMD ["tmux", "new", "-s", "dev"]
