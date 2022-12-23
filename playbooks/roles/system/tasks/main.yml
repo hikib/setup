@@ -1,4 +1,0 @@
----
-- name: Update system and install vim, tmux, and tree
-  import_tasks: debian.yml
-  when: ansible_facts['os_family']|lower == 'debian'

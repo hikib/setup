@@ -1,5 +1,0 @@
----
-- name: Building IfcOpenShell
-  import_tasks: ifcopenshell.yml
-  tags: ifc
-
