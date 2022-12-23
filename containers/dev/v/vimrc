@@ -1,0 +1,91 @@
+"  ---- PLUGINS
+" Install vim-plug:
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+call plug#begin('~/.vim/plugged')
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-commentary'
+call plug#end()
+
+" prevent polyglot from overwriting markdown
+let g:polyglot_disabled = ['markdown']
+
+" ----- SOURCES
+source ~/.vim/functions.vim " functions and autocommands
+source ~/.vim/mappings.vim
+
+" ----- SETTINGS
+syntax on
+filetype on
+filetype plugin on
+filetype indent on
+set belloff=all
+" set number
+" set relativenumber
+set nonumber
+set nocompatible
+set icon
+set showmode
+set showmatch
+set history=100
+set autowrite           " autosave when changing
+set hidden              " when switching buffers
+set cmdheight=1         " avoid HitEnter prompts
+set shortmess=aoOtIF    " avoid HitEnter prompts
+set nobackup            " more risky, but cleaner
+set noswapfile
+set nowritebackup
+set ttyfast             " faster scrolling
+set nofixendofline      " prevent silent fixing by vim
+set incsearch           " highlight search while typing
+set hlsearch
+set ignorecase
+
+set path+=**
+set nofixendofline      " better ascii friendly listchars
+set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
+set foldenable
+set wrapscan
+set noruler
+set laststatus=2
+set statusline=
+set statusline+=%*\ %<%.60F%*                 " path, trunc to 80 length
+set statusline+=\ [%{strlen(&ft)?&ft:'none'}] " filetype
+set statusline+=%*\ %l:%c%*                   " current line and column
+set statusline+=%*\ %p%%%*                    " percentage
+
+set textwidth=72
+set linebreak
+set tabstop=2
+set shiftwidth=2
+set smarttab
+set smartindent
+set autoindent
+set expandtab       " replace tabs with spaces
+set softtabstop=2
+set wildmenu        " Better command search
+set wildignorecase
+
+let g:netrw_fastbrowse = 0
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+' " dotfiles
+let g:netrw_liststyle=3
+let g:netrw_keepdir = 0
+let g:netrw_banner = 0
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+hi! link netrwMarkFile Search
+
+" ----- Colors
+
+" let base16colorspace=256  " Access colors present in 256 colorspace
+" hi Conceal guibg=NONE
+set background=dark
+set termguicolors
+
+" from github.com/lifepillar/vim-gruvbox8
+colorscheme gruvbox8_hard
+
+" Copied and made changes to vim-monotone
+" github.com/Lokaltog/vim-monotone
+" colorscheme monotone
