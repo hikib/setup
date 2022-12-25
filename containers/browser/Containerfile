@@ -5,8 +5,8 @@ MAINTAINER "hikib <hikib@proton.me>
 RUN apk update && apk add --no-cache w3m
 WORKDIR /web
 # --- CONFIG
-RUN wget https://raw.githubusercontent.com/hikmet-kibar/dot/master/uni/w3m/bookmark.html
-RUN wget https://raw.githubusercontent.com/hikmet-kibar/dot/master/uni/w3m/config
+RUN wget https://raw.githubusercontent.com/hikib/dot/master/uni/w3m/bookmark.html
+RUN wget https://raw.githubusercontent.com/hikib/dot/master/uni/w3m/config
 ENV TZ=Europe/Copenhagen
 
 ENTRYPOINT ["w3m", "-B", "-bookmark", "/web/bookmark.html", "-config", "web/config"]
