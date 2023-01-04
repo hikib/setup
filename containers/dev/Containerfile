@@ -8,29 +8,29 @@ ENV TZ=Europe/Copenhagen
 # ---- APPS
 RUN apk update && apk add --no-cache \
     bash \
+    bash-completion \
     curl \
     git \
-    tmux \
-    tree \
-    vim \
-    go \
     py3-pip \
     python3 \
     shellcheck \
+    tmux \
+    tree \
     tzdata \
-    bash-completion \
-    w3m
+    vim \
+    w3m \
+    && curl -sSf https://sh.rustup.rs | bash -s -- -y
 
 # ---- CONFIG
 
 WORKDIR /dotfiles
-RUN git clone https://github.com/hikib/scripts && \
-    git clone https://github.com/hikib/dot && \
-    ./scripts/uni/setup && \
-    ./dot/uni/bash/setup && \
-    ./dot/uni/tmux/setup && \
-    ./dot/uni/vim/setup && \
-    ./dot/uni/w3m/setup
+RUN git clone https://github.com/hikib/scripts \
+    && git clone https://github.com/hikib/dot \
+    && ./dot/uni/bash/setup \
+    && ./dot/uni/tmux/setup \
+    && ./dot/uni/vim/setup \
+    && ./dot/uni/w3m/setup \
+    && ./scripts/uni/setup
 
 # ---- START IN TMUX
 WORKDIR /home
