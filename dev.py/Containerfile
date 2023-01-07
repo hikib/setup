@@ -1,0 +1,5 @@
+FROM docker.io/hikib/dev
+MAINTAINER "hikib <hikib@proton.me>"
+
+# ---- APPS
+RUN apk update && apk add --no-cache py3-pip python3

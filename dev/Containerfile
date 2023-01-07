@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER "hikib <hikib@proton.me>
+MAINTAINER "hikib <hikib@proton.me>"
 
 # ---- SETUP
 ENV HOME /home
@@ -11,26 +11,22 @@ RUN apk update && apk add --no-cache \
     bash-completion \
     curl \
     git \
-    py3-pip \
-    python3 \
     shellcheck \
     tmux \
     tree \
     tzdata \
     vim \
-    w3m \
-    && curl -sSf https://sh.rustup.rs | bash -s -- -y
+    w3m
 
 # ---- CONFIG
-
 WORKDIR /dotfiles
 RUN git clone https://github.com/hikib/scripts \
     && git clone https://github.com/hikib/dot \
-    && ./dot/uni/bash/setup \
-    && ./dot/uni/tmux/setup \
-    && ./dot/uni/vim/setup \
-    && ./dot/uni/w3m/setup \
-    && ./scripts/uni/setup
+    && ./dot/uni.bash/setup.sh \
+    && ./dot/uni.tmux/setup.sh \
+    && ./dot/uni.vim/setup.sh \
+    && ./dot/uni.w3m/setup.sh \
+    && ./scripts/setup.sh
 
 # ---- START IN TMUX
 WORKDIR /home
