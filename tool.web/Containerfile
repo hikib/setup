@@ -1,12 +1,12 @@
 FROM alpine:latest
 MAINTAINER "hikib <hikib@proton.me>
 
-# --- NEED
-RUN apk update && apk add --no-cache w3m
-WORKDIR /web
-# --- CONFIG
-RUN wget https://raw.githubusercontent.com/hikib/dot/master/uni/w3m/bookmark.html
-RUN wget https://raw.githubusercontent.com/hikib/dot/master/uni/w3m/config
 ENV TZ=Europe/Copenhagen
+WORKDIR /web
 
-ENTRYPOINT ["w3m", "-B", "-bookmark", "/web/bookmark.html", "-config", "web/config"]
+RUN apk update \
+  && apk add --no-cache w3m \
+  && wget https://raw.githubusercontent.com/hikib/dot/master/uni.w3m/bookmark.html \
+  && wget https://raw.githubusercontent.com/hikib/dot/master/uni.w3m/config
+
+ENTRYPOINT ["w3m", "-B", "-bookmark", "/web/bookmark.html", "-config", "/web/config"]
