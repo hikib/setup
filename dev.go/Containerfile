@@ -5,6 +5,6 @@ ENV GOPATH=$HOME/go
 ENV PATH="$PATH:$GOPATH/bin"
 
 # ---- APPS
-RUN apk update \
-    && apk add --no-cache go \
+RUN sudo apk update \
+    && sudo apk add --no-cache go \
     && vim +PlugInstall +qall &>/dev/null

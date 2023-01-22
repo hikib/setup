@@ -2,8 +2,8 @@ FROM docker.io/hikib/dev
 MAINTAINER "hikib <hikib@proton.me>"
 
 # ---- APPS
-RUN apk update \
-    && apk add --no-cache gcc \
+RUN sudo apk update \
+    && sudo apk add --no-cache gcc \
     && curl -sSf https://sh.rustup.rs | bash -s -- -y \
     && source "$HOME/.cargo/env" \
     && vim +PlugInstall +qall &>/dev/null
