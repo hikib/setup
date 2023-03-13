@@ -14,6 +14,7 @@ RUN sudo apk update && sudo apk add --no-cache \
     bash-completion \
     curl \
     git \
+    ripgrep \
     shellcheck \
     tmux \
     tree \
