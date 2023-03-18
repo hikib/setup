@@ -7,13 +7,11 @@ env:
   IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
 
 jobs:
-  build:
-    name: Build and Push Image
+  login:
+    name: Login to GitHub Container Registry
     runs-on: ubuntu-20.04
-
     steps:
       - uses: actions/checkout@v2
-
       - name: Log in to ghcr.io
         uses: redhat-actions/podman-login@v1
         with:
@@ -21,7 +19,23 @@ jobs:
           password: ${{ env.REGISTRY_PASSWORD }}
           registry: ${{ env.IMAGE_REGISTRY }}
 
-      - name: Build dev Image
+  build:
+    name: Build and Push Images
+    needs: login
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Log in to ghcr.io
+        id: login
+        uses: redhat-actions/podman-login@v1
+        with:
+          username: ${{ env.REGISTRY_USER }}
+          password: ${{ env.REGISTRY_PASSWORD }}
+          registry: ${{ env.IMAGE_REGISTRY }}
+
+      - name: Build dev
         id: build-dev
         uses: redhat-actions/buildah-build@v2
         with:
@@ -29,16 +43,79 @@ jobs:
           tags: latest ${{ github.sha }}
           containerfiles: |
             ./dev/Containerfile
-            ./dev.go/Containerfile
-            ./dev.py/Containerfile
 
-      - name: Push To ghcr.io
-        id: push-dev
-        uses: redhat-actions/push-to-registry@v2.7
+      - name: Push dev
+        needs: build-dev
+        uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build-dev.outputs.image }}
           tags: ${{ steps.build-dev.outputs.tags }}
           registry: ${{ env.IMAGE_REGISTRY }}
 
-      - name: Print Image URL
-        run: echo "Image pushed to ${{ steps.push-dev.outputs.registry-paths }}"
+      - name: Build dev.go
+        id: build-dev-go
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: dev.go
+          tags: latest ${{ github.sha }}
+          containerfiles: |
+            ./dev.go/Containerfile
+
+      - name: Push dev.go
+        needs: build-dev-go
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-dev-go.outputs.image }}
+          tags: ${{ steps.build-dev-go.outputs.tags }}
+          registry: ${{ env.IMAGE_REGISTRY }}
+
+      - name: Build dev.py
+        id: build-dev-py
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: dev.py
+          tags: latest ${{ github.sha }}
+          containerfiles: |
+            ./dev.py/Containerfile
+
+      - name: Push dev.py
+        needs: build-dev-py
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-dev-py.outputs.image }}
+          tags: ${{ steps.build-dev-py.outputs.tags }}
+          registry: ${{ env.IMAGE_REGISTRY }}
+
+      - name: Build dev.rs
+        id: build-dev-rs
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: dev.rs
+          tags: latest ${{ github.sha }}
+          containerfiles: |
+            ./dev.rs/Containerfile
+
+      - name: Push dev.rs
+        needs: build-dev-rs
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-dev-rs.outputs.image }}
+          tags: ${{ steps.build-dev-rs.outputs.tags }}
+          registry: ${{ env.IMAGE_REGISTRY }}
+
+      - name: Build tool.web
+        id: build-tool-web
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: tool.web
+          tags: latest ${{ github.sha }}
+          containerfiles: |
+            ./tool.web/Containerfile
+
+      - name: Push tool.web
+        needs: build-tool-web
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-tool.outputs.image }}
+          tags: ${{ steps.build-tool.outputs.tags }}
+          registry: ${{ env.IMAGE_REGISTRY }}
