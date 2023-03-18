@@ -45,7 +45,6 @@ jobs:
             ./dev/Containerfile
 
       - name: Push dev
-        needs: build-dev
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build-dev.outputs.image }}
@@ -62,7 +61,6 @@ jobs:
             ./dev.go/Containerfile
 
       - name: Push dev.go
-        needs: build-dev-go
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build-dev-go.outputs.image }}
@@ -79,7 +77,6 @@ jobs:
             ./dev.py/Containerfile
 
       - name: Push dev.py
-        needs: build-dev-py
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build-dev-py.outputs.image }}
@@ -96,7 +93,6 @@ jobs:
             ./dev.rs/Containerfile
 
       - name: Push dev.rs
-        needs: build-dev-rs
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build-dev-rs.outputs.image }}
@@ -113,7 +109,6 @@ jobs:
             ./tool.web/Containerfile
 
       - name: Push tool.web
-        needs: build-tool-web
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build-tool.outputs.image }}
