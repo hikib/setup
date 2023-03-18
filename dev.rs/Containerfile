@@ -1,4 +1,4 @@
-FROM docker.io/hikib/dev
+FROM ghcr.io/hikib/dev
 MAINTAINER "hikib <hikib@proton.me>"
 
 # ---- APPS
