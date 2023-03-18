@@ -19,21 +19,13 @@ jobs:
           password: ${{ env.REGISTRY_PASSWORD }}
           registry: ${{ env.IMAGE_REGISTRY }}
 
-  build:
-    name: Build and Push Images
+  build-dev:
+    name: Build and Push dev Images
     needs: login
     runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Log in to ghcr.io
-        id: login
-        uses: redhat-actions/podman-login@v1
-        with:
-          username: ${{ env.REGISTRY_USER }}
-          password: ${{ env.REGISTRY_PASSWORD }}
-          registry: ${{ env.IMAGE_REGISTRY }}
 
       - name: Build dev
         id: build-dev
@@ -45,11 +37,19 @@ jobs:
             ./dev/Containerfile
 
       - name: Push dev
-        uses: redhat-actions/push-to-registry@v2
+        uses: redhat-actions/push-to-registry@v2.7
         with:
           image: ${{ steps.build-dev.outputs.image }}
           tags: ${{ steps.build-dev.outputs.tags }}
           registry: ${{ env.IMAGE_REGISTRY }}
+
+  build-dev-go:
+    name: Build and Push dev.go Images
+    needs: login
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
 
       - name: Build dev.go
         id: build-dev-go
@@ -61,11 +61,19 @@ jobs:
             ./dev.go/Containerfile
 
       - name: Push dev.go
-        uses: redhat-actions/push-to-registry@v2
+        uses: redhat-actions/push-to-registry@v2.7
         with:
           image: ${{ steps.build-dev-go.outputs.image }}
           tags: ${{ steps.build-dev-go.outputs.tags }}
           registry: ${{ env.IMAGE_REGISTRY }}
+
+  build-dev-py:
+    name: Build and Push dev.py Images
+    needs: login
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
 
       - name: Build dev.py
         id: build-dev-py
@@ -77,11 +85,19 @@ jobs:
             ./dev.py/Containerfile
 
       - name: Push dev.py
-        uses: redhat-actions/push-to-registry@v2
+        uses: redhat-actions/push-to-registry@v2.7
         with:
           image: ${{ steps.build-dev-py.outputs.image }}
           tags: ${{ steps.build-dev-py.outputs.tags }}
           registry: ${{ env.IMAGE_REGISTRY }}
+
+  build-dev-rs:
+    name: Build and Push dev.rs Images
+    needs: login
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
 
       - name: Build dev.rs
         id: build-dev-rs
@@ -93,15 +109,23 @@ jobs:
             ./dev.rs/Containerfile
 
       - name: Push dev.rs
-        uses: redhat-actions/push-to-registry@v2
+        uses: redhat-actions/push-to-registry@v2.7
         with:
           image: ${{ steps.build-dev-rs.outputs.image }}
           tags: ${{ steps.build-dev-rs.outputs.tags }}
           registry: ${{ env.IMAGE_REGISTRY }}
 
+  build-tool-web:
+    name: Build and Push tool.web Images
+    needs: login
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+
       - name: Build tool.web
         id: build-tool-web
-        uses: redhat-actions/buildah-build@v2
+        uses: redhat-actions/buildah-build@v2.
         with:
           image: tool.web
           tags: latest ${{ github.sha }}
@@ -109,7 +133,7 @@ jobs:
             ./tool.web/Containerfile
 
       - name: Push tool.web
-        uses: redhat-actions/push-to-registry@v2
+        uses: redhat-actions/push-to-registry@v2.7
         with:
           image: ${{ steps.build-tool.outputs.image }}
           tags: ${{ steps.build-tool.outputs.tags }}
