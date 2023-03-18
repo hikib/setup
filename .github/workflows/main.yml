@@ -21,11 +21,17 @@ jobs:
 
   build-dev:
     name: Build and Push dev Images
-    needs: login
     runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Log in to ghcr.io
+        uses: redhat-actions/podman-login@v1
+        with:
+          username: ${{ env.REGISTRY_USER }}
+          password: ${{ env.REGISTRY_PASSWORD }}
+          registry: ${{ env.IMAGE_REGISTRY }}
 
       - name: Build dev
         id: build-dev
@@ -45,11 +51,18 @@ jobs:
 
   build-dev-go:
     name: Build and Push dev.go Images
-    needs: login
+    needs: build-dev
     runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Log in to ghcr.io
+        uses: redhat-actions/podman-login@v1
+        with:
+          username: ${{ env.REGISTRY_USER }}
+          password: ${{ env.REGISTRY_PASSWORD }}
+          registry: ${{ env.IMAGE_REGISTRY }}
 
       - name: Build dev.go
         id: build-dev-go
@@ -69,11 +82,18 @@ jobs:
 
   build-dev-py:
     name: Build and Push dev.py Images
-    needs: login
+    needs: build-dev
     runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Log in to ghcr.io
+        uses: redhat-actions/podman-login@v1
+        with:
+          username: ${{ env.REGISTRY_USER }}
+          password: ${{ env.REGISTRY_PASSWORD }}
+          registry: ${{ env.IMAGE_REGISTRY }}
 
       - name: Build dev.py
         id: build-dev-py
@@ -93,11 +113,18 @@ jobs:
 
   build-dev-rs:
     name: Build and Push dev.rs Images
-    needs: login
+    needs: build-dev
     runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Log in to ghcr.io
+        uses: redhat-actions/podman-login@v1
+        with:
+          username: ${{ env.REGISTRY_USER }}
+          password: ${{ env.REGISTRY_PASSWORD }}
+          registry: ${{ env.IMAGE_REGISTRY }}
 
       - name: Build dev.rs
         id: build-dev-rs
@@ -117,15 +144,21 @@ jobs:
 
   build-tool-web:
     name: Build and Push tool.web Images
-    needs: login
     runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v2
 
+      - name: Log in to ghcr.io
+        uses: redhat-actions/podman-login@v1
+        with:
+          username: ${{ env.REGISTRY_USER }}
+          password: ${{ env.REGISTRY_PASSWORD }}
+          registry: ${{ env.IMAGE_REGISTRY }}
+
       - name: Build tool.web
         id: build-tool-web
-        uses: redhat-actions/buildah-build@v2.
+        uses: redhat-actions/buildah-build@v2
         with:
           image: tool.web
           tags: latest ${{ github.sha }}
