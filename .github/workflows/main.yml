@@ -29,6 +29,8 @@ jobs:
           tags: latest ${{ github.sha }}
           containerfiles: |
             ./dev/Containerfile
+            ./dev.go/Containerfile
+            ./dev.py/Containerfile
 
       - name: Push To ghcr.io
         id: push-dev
