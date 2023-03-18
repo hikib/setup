@@ -23,7 +23,7 @@ RUN sudo apk update && sudo apk add --no-cache \
     w3m
 
 # ---- CONFIG
-WORKDIR /dotfiles
+WORKDIR /home/hikib/dotfiles
 RUN git clone https://github.com/hikib/scripts \
     && git clone https://github.com/hikib/dot \
     && ./dot/uni.bash/setup.sh \
