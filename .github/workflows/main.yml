@@ -1,0 +1,47 @@
+name: Build and push images
+on:
+  push:
+
+env:
+  REGISTRY_USER: ${{ github.actor }}
+  REGISTRY_PASSWORD: ${{ secrets.GHCR_TOKEN }}
+  IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
+
+jobs:
+  login:
+    name: Log in to GitHub Container Registry
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Log in to ghcr.io
+        uses: redhat-actions/podman-login@v1
+        with:
+          username: ${{ env.REGISTRY_USER }}
+          password: ${{ env.REGISTRY_PASSWORD }}
+          registry: ${{ env.IMAGE_REGISTRY }}
+    
+  build:
+    name: Build and push image
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build Image
+      id: build-image
+      uses: redhat-actions/buildah-build@v2
+      with:
+        image: dev
+        tags: latest ${{ github.sha }}
+        containerfiles: |
+          ./dev/Containerfile
+
+    - name: Push To ghcr.io
+      id: push-to-ghcr
+      uses: redhat-actions/push-to-registry@v2
+      with:
+        image: ${{ steps.build-image.outputs.image }}
+        tags: ${{ steps.build-image.outputs.tags }}
+        registry:  ${{ env.IMAGE_REGISTRY }}
+
+    - name: Print image url
+      run: echo "Image pushed to ${{ steps.push-to-ghcr.outputs.registry-paths }}"
