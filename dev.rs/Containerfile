@@ -4,6 +4,6 @@ MAINTAINER "hikib <hikib@proton.me>"
 # ---- APPS
 RUN sudo apk update \
     && sudo apk add --no-cache gcc \
-    && curl -sSf https://sh.rustup.rs | bash -s -- -y \
+    && curl -sSf https://sh.rustup.rs | sudo bash -s -- -y \
     && source "$HOME/.cargo/env" \
     && vim +PlugInstall +qall &>/dev/null
