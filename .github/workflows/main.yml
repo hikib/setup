@@ -99,37 +99,6 @@ jobs:
           tags: ${{ steps.build-dev-py.outputs.tags }}
           registry: ${{ env.IMAGE_REGISTRY }}
 
-  build-dev-rs:
-    name: Build and Push dev.rs Images
-    needs: build-dev
-    runs-on: ubuntu-20.04
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Log in to ghcr.io
-        uses: redhat-actions/podman-login@v1
-        with:
-          username: ${{ env.REGISTRY_USER }}
-          password: ${{ env.REGISTRY_PASSWORD }}
-          registry: ${{ env.IMAGE_REGISTRY }}
-
-      - name: Build dev.rs
-        id: build-dev-rs
-        uses: redhat-actions/buildah-build@v2
-        with:
-          image: dev.rs
-          tags: latest ${{ github.sha }}
-          containerfiles: |
-            ./dev.rs/Containerfile
-
-      - name: Push dev.rs
-        uses: redhat-actions/push-to-registry@v2.7
-        with:
-          image: ${{ steps.build-dev-rs.outputs.image }}
-          tags: ${{ steps.build-dev-rs.outputs.tags }}
-          registry: ${{ env.IMAGE_REGISTRY }}
-
   build-tool-web:
     name: Build and Push tool.web Images
     runs-on: ubuntu-20.04
