@@ -26,7 +26,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           image: dev
-          tags: latest ${{ github.sha }}
+          tags: latest
           containerfiles: |
             ./dev/Containerfile
 
@@ -57,7 +57,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           image: dev.go
-          tags: latest ${{ github.sha }}
+          tags: latest
           containerfiles: |
             ./dev.go/Containerfile
 
@@ -88,7 +88,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           image: dev.py
-          tags: latest ${{ github.sha }}
+          tags: latest
           containerfiles: |
             ./dev.py/Containerfile
 
@@ -118,7 +118,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           image: tool.web
-          tags: latest ${{ github.sha }}
+          tags: latest
           containerfiles: |
             ./tool.web/Containerfile
 
