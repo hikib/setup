@@ -16,7 +16,6 @@ RUN sudo apk update && sudo apk add --no-cache \
     git \
     ripgrep \
     shellcheck \
-    tmux \
     tree \
     tzdata \
     vim \
@@ -27,7 +26,6 @@ WORKDIR /dotfiles
 RUN sudo git clone https://github.com/hikib/scripts \
     && sudo git clone https://github.com/hikib/dot \
     && ./dot/uni.bash/setup.sh \
-    && ./dot/uni.tmux/setup.sh \
     && ./dot/uni.vim/setup.sh \
     && ./dot/uni.w3m/setup.sh \
     && ./scripts/setup.sh
@@ -36,8 +34,3 @@ RUN sudo git clone https://github.com/hikib/scripts \
 WORKDIR /home/hikib
 
 ENTRYPOINT "/bin/bash"
-
-# split pane render issue in tmux
-# working with Windows Terminal panes instead ...
-# ENTRYPOINT ["/bin/bash", "-l", "-c"]
-# CMD ["tmux", "new", "-s", "dev"]
