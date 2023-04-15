@@ -35,5 +35,9 @@ RUN sudo git clone https://github.com/hikib/scripts \
 # ---- START IN TMUX
 WORKDIR /home/hikib
 
-ENTRYPOINT ["/bin/bash", "-l", "-c"]
-CMD ["tmux", "new", "-s", "dev"]
+ENTRYPOINT "/bin/bash"
+
+# split pane render issue in tmux
+# working with Windows Terminal panes instead ...
+# ENTRYPOINT ["/bin/bash", "-l", "-c"]
+# CMD ["tmux", "new", "-s", "dev"]
