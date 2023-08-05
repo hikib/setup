@@ -1,5 +1,5 @@
-FROM ghcr.io/hikib/dev
+FROM ghcr.io/hikib/dev.py
 MAINTAINER "hikib <hikib@proton.me>"
 
 # ---- APPS
-RUN sudo apk update && sudo apk add --no-cache py3-pip python3
+RUN sudo pip install specklepy
