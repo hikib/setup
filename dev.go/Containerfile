@@ -1,7 +1,7 @@
 FROM ghcr.io/hikib/dev
 MAINTAINER "hikib <hikib@proton.me>"
 
-ENV GOPATH=$HOME/go
+ENV GOPATH="/home/hikib/go"
 ENV PATH="$PATH:$GOPATH/bin"
 
 # ---- APPS
