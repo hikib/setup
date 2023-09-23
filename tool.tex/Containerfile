@@ -1,5 +1,6 @@
 FROM pandoc/latex:latest
 
-RUN tlmgr update --self && tlmgr install sectsty lastpage ucs roboto fontaxes enumitem pbox ragged2e
+RUN tlmgr update --self && tlmgr install sectsty lastpage ucs fontaxes enumitem pbox ragged2e
+RUN tlmgr install sourceserifpro ly1 roboto cooperhewitt
 
 ENTRYPOINT ["pdflatex"]

@@ -7,4 +7,5 @@ ENV PATH="$PATH:$GOPATH/bin"
 # ---- APPS
 RUN sudo apk update \
     && sudo apk add --no-cache go \
-    && vim +PlugInstall +qall &>/dev/null
+    && vim +PlugInstall +qall &>/dev/null \
+    && vim +'CocInstall -sync coc-go' +qall &>/dev/null

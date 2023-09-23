@@ -14,12 +14,22 @@ RUN sudo apk update && sudo apk add --no-cache \
     bash-completion \
     curl \
     git \
+    less \
+    less-doc \
+    man-pages \
+    mandoc-apropos \
     ripgrep \
     shellcheck \
     tree \
     tzdata \
     vim \
     w3m
+
+# ---- COC
+RUN sudo apk add --no-cache \
+    nodejs \
+    yarn \
+    npm
 
 # ---- CONFIG
 WORKDIR /dotfiles
