@@ -1,5 +1,5 @@
 name: Build and push images
-on: [push]
+on: [push, workflow_dispatch]
 
 env:
   REGISTRY_USER: ${{ github.actor }}
