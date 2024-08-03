@@ -20,6 +20,7 @@ RUN sudo apk update && sudo apk add --no-cache \
     mandoc-apropos \
     ripgrep \
     shellcheck \
+    tmux \
     tree \
     tzdata \
     vim \
@@ -39,6 +40,10 @@ RUN sudo git clone https://github.com/hikib/scripts \
     && ./dot/uni.vim/setup.sh \
     && ./dot/uni.w3m/setup.sh \
     && ./scripts/setup.sh
+
+RUN ./dot/uni.tmux/setup.sh
+RUN sudo apk add --no-cache neovim
+RUN ./dot/uni.nvim/setup.sh
 
 # ---- START IN TMUX
 WORKDIR /home/hikib
