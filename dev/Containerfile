@@ -14,38 +14,41 @@ RUN sudo apk update && sudo apk add --no-cache \
     bash-completion \
     curl \
     git \
+    gzip \
     less \
     less-doc \
-    man-pages \
     mandoc-apropos \
+    man-pages \
+    neovim \
+    nodejs-current \
+    npm \
     ripgrep \
     shellcheck \
     tmux \
     tree \
     tzdata \
+    unzip \
     vim \
-    w3m
+    w3m \
+    wget \
+    yarn
 
-# ---- COC
 RUN sudo apk add --no-cache \
-    nodejs \
-    yarn \
-    npm
+    python3 \
+    py3-pip
 
 # ---- CONFIG
 WORKDIR /dotfiles
 RUN sudo git clone https://github.com/hikib/scripts \
     && sudo git clone https://github.com/hikib/dot \
     && ./dot/uni.bash/setup.sh \
-    && ./dot/uni.vim/setup.sh \
+    && ./dot/uni.nvim/setup.sh \
+    && ./dot/uni.tmux/setup.sh \
     && ./dot/uni.w3m/setup.sh \
     && ./scripts/setup.sh
 
-RUN ./dot/uni.tmux/setup.sh
-RUN sudo apk add --no-cache neovim
-RUN ./dot/uni.nvim/setup.sh
 
-# ---- START IN TMUX
 WORKDIR /home/hikib
 
 ENTRYPOINT "/bin/bash"
+
