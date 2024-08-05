@@ -22,20 +22,17 @@ RUN sudo apk update && sudo apk add --no-cache \
     neovim \
     nodejs-current \
     npm \
+    py3-pip \
+    python3 \
     ripgrep \
     shellcheck \
     tmux \
     tree \
     tzdata \
     unzip \
-    vim \
     w3m \
     wget \
     yarn
-
-RUN sudo apk add --no-cache \
-    python3 \
-    py3-pip
 
 # ---- CONFIG
 WORKDIR /dotfiles
@@ -47,8 +44,5 @@ RUN sudo git clone https://github.com/hikib/scripts \
     && ./dot/uni.w3m/setup.sh \
     && ./scripts/setup.sh
 
-
 WORKDIR /home/hikib
-
 ENTRYPOINT "/bin/bash"
-
