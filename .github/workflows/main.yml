@@ -7,12 +7,22 @@ env:
   IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
 
 jobs:
-  build-dev:
-    name: Build and Push dev Images
+  push-ghcr:
+    name: Build and Push dev image
     runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        install_latest: [ true, false ]
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout and Push to Registry action
+        uses: actions/checkout@v4
+
+      - name: Install lateset podman
+        if: matrix.install_latest
+        run: |
+          bash .github/install_latest_podman.sh
 
       - name: Log in to ghcr.io
         uses: redhat-actions/podman-login@v1
@@ -31,25 +41,10 @@ jobs:
             ./dev/Containerfile
 
       - name: Push dev
-        uses: redhat-actions/push-to-registry@v2.7
+        uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build-dev.outputs.image }}
           tags: ${{ steps.build-dev.outputs.tags }}
-          registry: ${{ env.IMAGE_REGISTRY }}
-
-  build-dev-go:
-    name: Build and Push dev.go Images
-    needs: build-dev
-    runs-on: ubuntu-20.04
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Log in to ghcr.io
-        uses: redhat-actions/podman-login@v1
-        with:
-          username: ${{ env.REGISTRY_USER }}
-          password: ${{ env.REGISTRY_PASSWORD }}
           registry: ${{ env.IMAGE_REGISTRY }}
 
       - name: Build dev.go
@@ -62,7 +57,7 @@ jobs:
             ./dev.go/Containerfile
 
       - name: Push dev.go
-        uses: redhat-actions/push-to-registry@v2.7
+        uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build-dev-go.outputs.image }}
           tags: ${{ steps.build-dev-go.outputs.tags }}
@@ -73,7 +68,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Log in to ghcr.io
         uses: redhat-actions/podman-login@v1
@@ -92,7 +87,7 @@ jobs:
             ./tool.web/Containerfile
 
       - name: Push tool.web
-        uses: redhat-actions/push-to-registry@v2.7
+        uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build-tool-web.outputs.image }}
           tags: ${{ steps.build-tool-web.outputs.tags }}
