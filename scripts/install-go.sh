@@ -4,7 +4,7 @@ echo "Removing existing installs..."
 [ -d /usr/local/go ] && sudo rm -rf /usr/local/go
 
 echo "Downloading tar file..."
-VERSION="1.22.4"
+VERSION="1.23.1"
 ARCH="amd64"
 FILENAME="go${VERSION}.linux-${ARCH}.tar.gz"
 curl -O -L "https://golang.org/dl/$FILENAME"
